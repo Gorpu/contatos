@@ -1,14 +1,25 @@
-import 'package:leads/data/data_contacts.dart';
+import 'package:leads/customer/Models/data/contatos_model.dart';
 
 class LeadsViewModel {
-  String nome = "";
+  final contatosModel = ContatosModel();
 
+  String nome = "";
   List<Map<String, dynamic>>? filterSearchAction(String value) {
-    List<Map<String, dynamic>> data = dataContacts();
+    List<ContatosModel> data = contatosModel.dataContactsModel();
 
     nome = value;
-    if (data.any((item) => item["name"] == value)) {
-      return data.where((item) => item["name"] == value).toList();
+    if (data.any((value) => value.name == nome)) {
+      return data
+          .where((item) => item.name == value)
+          .map(
+            (contato) => {
+              "name": contato.name,
+              "phone": contato.phone,
+              "calling": contato.calling,
+              "lastSeen": contato.lastSeen,
+            },
+          )
+          .toList();
     } else {
       return null;
     }

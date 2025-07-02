@@ -11,7 +11,7 @@ class AppLabel extends StatelessWidget {
       style: TextStyle(
         fontFamily: "Gilroy",
         fontWeight: FontWeight.w600,
-        fontSize: 24,
+        fontSize: 32,
       ),
     );
   }

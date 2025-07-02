@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import "package:leads/components/app_card.dart";
-import "package:leads/data/data_contacts.dart";
+import "package:leads/customer/Models/data/contatos_model.dart";
 
 class AppContactsList extends StatefulWidget {
   final List<Map<String, dynamic>>? contatos;
@@ -13,16 +13,24 @@ class AppContactsList extends StatefulWidget {
 class _AppContactsListState extends State<AppContactsList> {
   @override
   Widget build(BuildContext context) {
-    final contatos = dataContacts();
+    final contatosModel = ContatosModel();
+    final contatos = contatosModel.dataContactsModel();
     return SizedBox(
       height: MediaQuery.of(context).size.height - 45,
       child: ListView.builder(
         itemCount: contatos.length,
         itemBuilder: (context, index) {
-          String nome = contatos[index]["name"] ?? contatos[index]["phone"];
-          bool ligar = contatos[index]["calling"];
-          String visto = contatos[index]["lastSeen"];
-          return AppCard(nome: nome, ligar: ligar, visto: visto);
+          final contato = contatos[index];
+          String? nome = contato.name ?? contato.phone;
+          List<String> tegs = contato.tags ?? [""];
+          bool ligar = contato.calling ?? false;
+          String visto = contato.lastSeen ?? "No records";
+          return AppCard(
+            nome: nome,
+            ligar: ligar,
+            tags: [...tegs],
+            visto: visto,
+          );
         },
       ),
     );
