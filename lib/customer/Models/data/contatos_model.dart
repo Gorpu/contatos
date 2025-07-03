@@ -11,7 +11,7 @@ class ContatosModel {
     this.calling,
     this.lastSeen,
   });
-  List<ContatosModel> dataContactsModel() {
+  List<ContatosModel> dataContactsModel(String? value) {
     List<Map<String, dynamic>> listContatos = [
       {
         "name": "Test lead for dB",
@@ -56,18 +56,36 @@ class ContatosModel {
         "lastSeen": "3 weeks ago",
       },
     ];
-    return listContatos.map((item) {
-      return ContatosModel(
-        name: item["name"],
-        phone: item["phone"],
-        tags: item["tags"],
-        calling: item["calling"],
-        lastSeen: item["lastSeen"],
-      );
-    }).toList();
+    if (value == null) {
+      return listContatos.map((item) {
+        return ContatosModel(
+          name: item["name"],
+          phone: item["phone"],
+          tags: item["tags"],
+          calling: item["calling"],
+          lastSeen: item["lastSeen"],
+        );
+      }).toList();
+    }
+    return listContatos
+        .where((item) {
+          final name = item["name"];
+          return name != null &&
+              name.toLowerCase().contains(value.toLowerCase());
+        })
+        .map((item) {
+          return ContatosModel(
+            name: item["name"],
+            phone: item["phone"],
+            tags: item["tags"],
+            calling: item["calling"],
+            lastSeen: item["lastSeen"],
+          );
+        })
+        .toList();
   }
 
-  List<Map<String, dynamic>> dataContacts() {
+  List<Map<String, dynamic>> dataContactsSearch() {
     return [
       {
         "name": "Test lead for dB",

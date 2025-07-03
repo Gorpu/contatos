@@ -1,10 +1,8 @@
 import "package:flutter/material.dart";
-import "package:leads/components/app_card.dart";
+import "package:leads/components/app_data_list_view.dart";
 import "package:leads/components/app_filter_button.dart";
 import "package:leads/components/app_icon_search.dart";
 import "package:leads/components/app_label.dart";
-import "package:leads/customer/Models/data/contatos_model.dart";
-import "package:leads/customer/leads_view_model.dart";
 
 class LeadsView extends StatefulWidget {
   const LeadsView({super.key});
@@ -14,12 +12,7 @@ class LeadsView extends StatefulWidget {
 }
 
 class _LeadsViewState extends State<LeadsView> {
-  late ContatosModel contatosModel = ContatosModel();
-  late var contatos = contatosModel.dataContactsModel();
-
-  LeadsViewModel view = LeadsViewModel();
-  bool mostrarList = false;
-  String? contactName;
+  String contactName = "";
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
@@ -40,7 +33,6 @@ class _LeadsViewState extends State<LeadsView> {
                 AppIconSearch(
                   onChanged: (value) {
                     contactName = value;
-                    view.filterSearchAction(value);
                   },
                 ),
               ],
@@ -49,34 +41,24 @@ class _LeadsViewState extends State<LeadsView> {
               padding: EdgeInsets.only(top: size.height * 0.024),
               child: AppFilterButton(
                 onPressed: () {
-                  setState(() {
-                    mostrarList = true;
-                  });
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        content: Text(
+                          "Função em desenvolvimento",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: "URWGeometric",
+                          ),
+                        ),
+                      );
+                    },
+                  );
                 },
               ),
             ),
-            if (mostrarList)
-              Expanded(
-                child: ListView.builder(
-                  itemCount: contatos.length,
-                  itemBuilder: (context, index) {
-                    final contato = contatos[index];
-                    String? nome = contato.name ?? contato.phone;
-                    List<String> tegs = contato.tags ?? [""];
-                    bool ligar = contato.calling ?? false;
-                    String visto = contato.lastSeen ?? "No records";
-                    return Padding(
-                      padding: EdgeInsets.only(bottom: size.height * 0.018),
-                      child: AppCard(
-                        nome: nome,
-                        ligar: ligar,
-                        tags: [...tegs],
-                        visto: visto,
-                      ),
-                    );
-                  },
-                ),
-              ),
+            Expanded(child: AppDataListView()),
           ],
         ),
       ),
