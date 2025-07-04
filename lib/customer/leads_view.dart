@@ -36,11 +36,12 @@ class _LeadsViewState extends State<LeadsView> {
                       valorDigitado = value;
                     });
                   },
-                  closeAction: () {},
-                  confirmAction: () {
+                  closeOption: () {
                     setState(() {
                       valorDigitado;
                     });
+                    valorDigitado = null;
+                    Navigator.pop(context);
                   },
                 ),
               ],

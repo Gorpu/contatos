@@ -9,7 +9,7 @@ class AppListComponents {
       final contatos = contatosModel.dataContactsModel(value: nameContact);
 
       final contato = contatos[index];
-      final String? nome = contato.name ?? contato.phone;
+      final String? nome = contato.nameContact ?? contato.phone;
       final List<String> tegs = contato.tags ?? [""];
       final bool ligar = contato.calling ?? false;
       final String visto = contato.lastSeen ?? "No records";

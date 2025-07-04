@@ -1,16 +1,18 @@
 class ContatosModel {
-  String? name;
+  String? nameContact;
   String? phone;
   List<String>? tags;
   bool? calling;
   String? lastSeen;
+
   ContatosModel({
-    this.name,
+    this.nameContact,
     this.phone,
     this.tags,
     this.calling,
     this.lastSeen,
   });
+
   List<ContatosModel> dataContactsModel({required String? value}) {
     List<Map<String, dynamic>> listContatos = [
       {
@@ -56,46 +58,35 @@ class ContatosModel {
         "lastSeen": "3 weeks ago",
       },
     ];
-    if (value != null && value.isNotEmpty) {
-      listContatos =
-          listContatos.where((contato) {
-            final name = contato['name']?.toString().toLowerCase() ?? '';
-            final phone = contato['phone']?.toString().toLowerCase() ?? '';
-            final tags =
-                (contato['tags'] as List<dynamic>)
-                    .map((e) => e.toString().toLowerCase())
-                    .toList();
-            final search = value;
-            return name.contains(search) ||
-                phone.contains(search) ||
-                tags.any((tag) => tag.contains(search));
-          }).toList();
-    } else if (value == null) {
-      return listContatos.map((item) {
-        return ContatosModel(
-          name: item["name"],
-          phone: item["phone"],
-          tags: item["tags"],
-          calling: item["calling"],
-          lastSeen: item["lastSeen"],
-        );
-      }).toList();
-    }
-    return listContatos
-        .where((item) {
-          final name = item["name"];
-          return name != null &&
-              name.toLowerCase().contains(value.toLowerCase());
-        })
-        .map((item) {
-          return ContatosModel(
-            name: item["name"],
-            phone: item["phone"],
-            tags: item["tags"],
-            calling: item["calling"],
-            lastSeen: item["lastSeen"],
-          );
-        })
-        .toList();
+
+    // Limpa espaços e converte para minúsculas
+    final search = value?.trim().toLowerCase() ?? '';
+
+    // Se estiver vazio, retorna todos
+    final filtered =
+        search.isEmpty
+            ? listContatos
+            : listContatos.where((contato) {
+              final name = contato['name']?.toString().toLowerCase() ?? '';
+              final phone = contato['phone']?.toString().toLowerCase() ?? '';
+              final tags =
+                  (contato['tags'] as List<dynamic>)
+                      .map((e) => e.toString().toLowerCase())
+                      .toList();
+
+              return name.contains(search) ||
+                  phone.contains(search) ||
+                  tags.any((tag) => tag.contains(search));
+            }).toList();
+
+    return filtered.map((item) {
+      return ContatosModel(
+        nameContact: item["name"],
+        phone: item["phone"],
+        tags: item["tags"],
+        calling: item["calling"],
+        lastSeen: item["lastSeen"],
+      );
+    }).toList();
   }
 }

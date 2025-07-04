@@ -8,12 +8,12 @@ class LeadsViewModel {
     List<ContatosModel> data = contatosModel.dataContactsModel(value: value);
 
     nome = value;
-    if (data.any((value) => value.name == nome)) {
+    if (data.any((value) => value.nameContact == nome)) {
       return data
-          .where((item) => item.name == value)
+          .where((item) => item.nameContact == value)
           .map(
             (contato) => {
-              "name": contato.name,
+              "name": contato.nameContact,
               "phone": contato.phone,
               "tags": contato.tags,
               "calling": contato.calling,

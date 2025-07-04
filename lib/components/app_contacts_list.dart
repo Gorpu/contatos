@@ -21,7 +21,7 @@ class _AppContactsListState extends State<AppContactsList> {
         itemCount: contatos.length,
         itemBuilder: (context, index) {
           final contato = contatos[index];
-          String? nome = contato.name ?? contato.phone;
+          String? nome = contato.nameContact ?? contato.phone;
           List<String> tegs = contato.tags ?? [""];
           bool ligar = contato.calling ?? false;
           String visto = contato.lastSeen ?? "No records";
