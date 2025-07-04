@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:leads/customer/Models/data/contatos_model.dart';
 
 class AppIconSearch extends StatefulWidget {
+  final String? contactName;
   final void Function()? closeAction;
   final void Function()? confirmAction;
   final VoidCallback? acao;
   final void Function(String)? onChanged;
   const AppIconSearch({
     super.key,
+    this.contactName,
     this.acao,
-    this.onChanged,
+    required this.onChanged,
     this.closeAction,
-    this.confirmAction,
+    required this.confirmAction,
   });
 
   @override
@@ -20,9 +22,9 @@ class AppIconSearch extends StatefulWidget {
 
 class _AppIconSearchState extends State<AppIconSearch> {
   var contatosModel = ContatosModel();
-  late var contatos = contatosModel.dataContactsModel(null);
-  String contactName = "";
-  bool mostrarCampo = true;
+  late var contatos = contatosModel.dataContactsModel(
+    value: widget.contactName,
+  );
   @override
   Widget build(BuildContext context) {
     return IconButton(
@@ -71,7 +73,9 @@ class _AppIconSearchState extends State<AppIconSearch> {
 
                           onPressed: () {
                             setState(() {
-                              contatos = contatosModel.dataContactsModel(null);
+                              contatos = contatosModel.dataContactsModel(
+                                value: widget.contactName,
+                              );
                               Navigator.pop(context);
                             });
                           },
@@ -95,14 +99,7 @@ class _AppIconSearchState extends State<AppIconSearch> {
                           ),
                           hintText: "Pesquisar Contatos",
                           suffixIcon: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                contatos = contatosModel.dataContactsModel(
-                                  contactName,
-                                );
-                                Navigator.pop(context);
-                              });
-                            },
+                            onPressed: widget.confirmAction,
                             icon: Icon(Icons.search, size: 24),
                           ),
                         ),

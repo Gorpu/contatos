@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "package:leads/components/app_data_list_view.dart";
+import "package:leads/components/app_list_components.dart";
 import "package:leads/components/app_filter_button.dart";
 import "package:leads/components/app_icon_search.dart";
 import "package:leads/components/app_label.dart";
@@ -12,7 +12,7 @@ class LeadsView extends StatefulWidget {
 }
 
 class _LeadsViewState extends State<LeadsView> {
-  String contactName = "";
+  String? valorDigitado;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
@@ -32,7 +32,15 @@ class _LeadsViewState extends State<LeadsView> {
                 AppLabel(label: "Leads"),
                 AppIconSearch(
                   onChanged: (value) {
-                    contactName = value;
+                    setState(() {
+                      valorDigitado = value;
+                    });
+                  },
+                  closeAction: () {},
+                  confirmAction: () {
+                    setState(() {
+                      valorDigitado;
+                    });
                   },
                 ),
               ],
@@ -58,7 +66,17 @@ class _LeadsViewState extends State<LeadsView> {
                 },
               ),
             ),
-            Expanded(child: AppDataListView()),
+            Expanded(
+              child: ListView.builder(
+                itemCount: AppListComponents.lengthAllData(valorDigitado),
+                itemBuilder:
+                    (context, index) => AppListComponents.cardsApp(
+                      context,
+                      index,
+                      valorDigitado,
+                    ),
+              ),
+            ),
           ],
         ),
       ),

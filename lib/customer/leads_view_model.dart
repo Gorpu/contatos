@@ -5,7 +5,7 @@ class LeadsViewModel {
 
   String nome = "";
   List<Map<String, dynamic>>? filterSearchAction(String value) {
-    List<ContatosModel> data = contatosModel.dataContactsModel(value);
+    List<ContatosModel> data = contatosModel.dataContactsModel(value: value);
 
     nome = value;
     if (data.any((value) => value.name == nome)) {
