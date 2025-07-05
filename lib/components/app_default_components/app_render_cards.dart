@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:leads/components/app_card.dart';
+import 'package:leads/components/app_default_components/app_card_componets/app_card.dart';
 import 'package:leads/customer/Models/data/contatos_model.dart';
 
 class AppRenderCards {

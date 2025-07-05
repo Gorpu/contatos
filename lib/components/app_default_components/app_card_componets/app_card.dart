@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:leads/components/app_phone_icon.dart';
+import 'package:leads/components/app_default_components/app_card_componets/app_phone_icon.dart';
 
 class AppCard extends StatelessWidget {
   final String? nome;

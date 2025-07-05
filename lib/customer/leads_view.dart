@@ -1,9 +1,9 @@
 import "package:flutter/material.dart";
 import "package:leads/components/app_default_components/app_text.dart";
 import "package:leads/components/app_default_components/app_transparent_button.dart";
-import "package:leads/components/app_render_cards.dart";
-import "package:leads/components/app_icon_search/app_icon_search.dart";
-import "package:leads/components/app_label.dart";
+import "package:leads/components/app_default_components/app_render_cards.dart";
+import "package:leads/components/app_default_components/app_icon_search/app_icon_search.dart";
+import "package:leads/components/app_default_components/app_label.dart";
 
 class LeadsView extends StatefulWidget {
   const LeadsView({super.key});

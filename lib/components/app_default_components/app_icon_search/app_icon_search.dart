@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:leads/components/app_icon_search/app_box.dart';
+import 'package:leads/components/app_default_components/app_icon_search/app_box.dart';
 import 'package:leads/customer/Models/data/contatos_model.dart';
 
 class AppIconSearch extends StatefulWidget {
