@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class AppLabel extends StatelessWidget {
   final String? label;
-  const AppLabel({super.key, required this.label});
+  final double fontSize;
+  const AppLabel({super.key, required this.label, required this.fontSize});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +12,7 @@ class AppLabel extends StatelessWidget {
       style: TextStyle(
         fontFamily: "Gilroy",
         fontWeight: FontWeight.w600,
-        fontSize: 32,
+        fontSize: fontSize,
       ),
     );
   }

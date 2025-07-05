@@ -66,7 +66,6 @@ class AppCard extends StatelessWidget {
                         ),
                     ],
                   ),
-
                   Text(
                     "$visto",
                     style: TextStyle(

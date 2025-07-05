@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:leads/components/app_card.dart';
 import 'package:leads/customer/Models/data/contatos_model.dart';
 
-class AppListComponents {
+class AppRenderCards {
   static Widget cardsApp(BuildContext context, int index, String? nameContact) {
     try {
       final contatosModel = ContatosModel();

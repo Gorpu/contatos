@@ -1,7 +1,8 @@
 import "package:flutter/material.dart";
-import "package:leads/components/app_list_components.dart";
-import "package:leads/components/app_filter_button.dart";
-import "package:leads/components/app_icon_search.dart";
+import "package:leads/components/app_default_components/app_text.dart";
+import "package:leads/components/app_default_components/app_transparent_button.dart";
+import "package:leads/components/app_render_cards.dart";
+import "package:leads/components/app_icon_search/app_icon_search.dart";
 import "package:leads/components/app_label.dart";
 
 class LeadsView extends StatefulWidget {
@@ -29,7 +30,7 @@ class _LeadsViewState extends State<LeadsView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppLabel(label: "Leads"),
+                AppLabel(label: "Leads", fontSize: 32),
                 AppIconSearch(
                   onChanged: (value) {
                     setState(() {
@@ -48,34 +49,38 @@ class _LeadsViewState extends State<LeadsView> {
             ),
             Padding(
               padding: EdgeInsets.only(top: size.height * 0.024),
-              child: AppFilterButton(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        content: Text(
-                          "Função em desenvolvimento",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: "URWGeometric",
-                          ),
-                        ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  AppText(text: "Your Leads", height: 20, width: 80),
+                  AppTransparentButton(
+                    text: "FILTER",
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            content: Text(
+                              "Função em desenvolvimento",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontFamily: "URWGeometric",
+                              ),
+                            ),
+                          );
+                        },
                       );
                     },
-                  );
-                },
+                  ),
+                ],
               ),
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: AppListComponents.lengthAllData(valorDigitado),
+                itemCount: AppRenderCards.lengthAllData(valorDigitado),
                 itemBuilder:
-                    (context, index) => AppListComponents.cardsApp(
-                      context,
-                      index,
-                      valorDigitado,
-                    ),
+                    (context, index) =>
+                        AppRenderCards.cardsApp(context, index, valorDigitado),
               ),
             ),
           ],
